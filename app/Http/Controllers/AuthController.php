@@ -12,7 +12,7 @@ class AuthController extends Controller
 {
     //
     public function registerpage(){
-        return view('register');
+        return $this->redirectifAuthenticated(page:'registerpage');
     }
     public function register(RegisterRequest $request){
 
@@ -21,8 +21,14 @@ class AuthController extends Controller
             return to_route('register')->with('success', 'You are succesfully registered');
         }
     }
+    public function redirectifAuthenticated(string $page){
+        if(Auth::check()){
+            return redirect()->back();
+        }
+        return to_route($page);
+    }
     public function loginpage(){
-        return view('login');
+        return $this->redirectifAuthenticated(page:'loginpage');
     }
     public function login(LoginRequest $request){
         $credentials = $request->only('email', 'password');

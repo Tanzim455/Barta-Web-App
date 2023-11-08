@@ -17,12 +17,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('index');
-})->name('home');
+})->name('home')->middleware('auth');
 Route::get('register',[AuthController::class,'registerpage'])->name('registerpage');
 Route::post('register',[AuthController::class,'register'])->name('register');
 Route::get('login',[AuthController::class,'loginpage'])->name('loginpage');
 Route::post('login',[AuthController::class,'login'])->name('login');
-Route::get('edit-profile',[ProfileController::class,'editprofile'])->name('edit-profile');
-Route::get('profile',[ProfileController::class,'profile'])->name('viewprofile');
+Route::get('edit-profile',[ProfileController::class,'editprofile'])->name('edit-profile')->middleware('auth');
+Route::get('profile',[ProfileController::class,'profile'])->name('viewprofile')->middleware('auth');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
