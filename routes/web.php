@@ -24,4 +24,5 @@ Route::get('login',[AuthController::class,'loginpage'])->name('loginpage');
 Route::post('login',[AuthController::class,'login'])->name('login');
 Route::get('edit-profile',[ProfileController::class,'editprofile'])->name('edit-profile');
 Route::get('profile',[ProfileController::class,'profile'])->name('viewprofile');
+Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 

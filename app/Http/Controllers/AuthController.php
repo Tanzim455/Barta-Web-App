@@ -32,4 +32,11 @@ class AuthController extends Controller
 
         return to_route('login')->with('message', 'Wrong credentials please enter correct email and password');
     }
+
+    public function logout() {
+        //Session::flush();
+        Auth::logout();
+
+        return to_route('login');
+    }
 }
