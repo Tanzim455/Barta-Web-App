@@ -13,14 +13,22 @@
         </div>
 
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form class="space-y-6" action="#" method="POST">
+            <form class="space-y-6" action="{{ route('register') }}" method="POST">
                 <!-- First Name -->
+                @csrf
                 <div>
                     <label for="first_name" class="block text-sm font-medium leading-6 text-gray-900">First Name</label>
                     <div class="mt-2">
-                        <input id="first_name" name="first_name" type="text" autocomplete="first_name"
-                            placeholder="Muhammad" required
+                        <input name="first_name" type="text" autocomplete="first_name" placeholder="Muhammad"
+                            required
                             class="block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6" />
+                        @error('first_name')
+                            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                                role="alert">
+                                <span class="font-medium">{{ $message }}</span>
+
+                            </div>
+                        @enderror
                     </div>
                 </div>
 
@@ -28,9 +36,16 @@
                 <div>
                     <label for="last_name" class="block text-sm font-medium leading-6 text-gray-900">Last Name</label>
                     <div class="mt-2">
-                        <input id="last_name" name="last_name" type="text" autocomplete="last_name"
-                            placeholder="Alp Arslan" required
+                        <input name="last_name" type="text" autocomplete="last_name" placeholder="Alp Arslan"
+                            required
                             class="block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6" />
+                        @error('last_name')
+                            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                                role="alert">
+                                <span class="font-medium">{{ $message }}</span>
+
+                            </div>
+                        @enderror
                     </div>
                 </div>
 
@@ -42,6 +57,13 @@
                         <input id="email" name="email" type="email" autocomplete="email"
                             placeholder="alp.arslan@mail.com" required
                             class="block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6" />
+                        @error('email')
+                            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                                role="alert">
+                                <span class="font-medium">{{ $message }}</span>
+
+                            </div>
+                        @enderror
                     </div>
                 </div>
 
@@ -52,6 +74,13 @@
                         <input id="password" name="password" type="password" autocomplete="current-password"
                             placeholder="••••••••" required
                             class="block w-full rounded-md border-0 p-2 p-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6" />
+                        @error('password')
+                            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                                role="alert">
+                                <span class="font-medium">{{ $message }}</span>
+
+                            </div>
+                        @enderror
                     </div>
                 </div>
 
@@ -65,7 +94,8 @@
 
             <p class="mt-10 text-center text-sm text-gray-500">
                 Already a member?
-                <a href="./login.html" class="font-semibold leading-6 text-black hover:text-black">Sign In</a>
+                <a href="{{ route('loginpage') }}" class="font-semibold leading-6 text-black hover:text-black">Sign
+                    In</a>
             </p>
         </div>
     </div>
