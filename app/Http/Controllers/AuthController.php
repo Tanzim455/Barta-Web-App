@@ -14,7 +14,10 @@ class AuthController extends Controller
     }
     public function register(RegisterRequest $request){
 
-        User::create($request->validated());
+        $user=User::create($request->validated());
+        if($user){
+            return to_route('register')->with('success', 'You are succesfully registered');
+        }
     }
     public function login(){
         return view('login');
