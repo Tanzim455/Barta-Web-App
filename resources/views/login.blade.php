@@ -13,8 +13,16 @@
         </div>
 
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form class="space-y-6" action="#" method="POST">
+            <form class="space-y-6" action="{{ route('login') }}" method="POST">
+                @csrf
                 <div>
+                    @if (session('message'))
+                        <div
+                            class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">
+                            <span class="font-medium"> {{ session('message') }}</span>
+
+                        </div>
+                    @endif
                     <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email
                         address</label>
                     <div class="mt-2">
@@ -22,6 +30,13 @@
                             placeholder="bruce@wayne.com" required
                             class="block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6" />
                     </div>
+                    @error('email')
+                        <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                            role="alert">
+                            <span class="font-medium">{{ $message }}</span>
+
+                        </div>
+                    @enderror
                 </div>
 
                 <div>
@@ -36,6 +51,13 @@
                             placeholder="••••••••" required
                             class="block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6" />
                     </div>
+                    @error('password')
+                        <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                            role="alert">
+                            <span class="font-medium">{{ $message }}</span>
+
+                        </div>
+                    @enderror
                 </div>
 
                 <div>
