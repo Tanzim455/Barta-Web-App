@@ -21,13 +21,13 @@ class AuthController extends Controller
             return to_route('register')->with('success', 'You are succesfully registered');
         }
     }
-    // public function redirectifAuthenticated(string $page){
-    //     if(Auth::check()){
-    //         return redirect()->back();
-    //     }
+    public function redirectifAuthenticated(string $page){
+        if(Auth::check()){
+            return redirect()->back();
+        }
 
-    //     return view($page);
-    // }
+        return view($page);
+    }
     public function loginpage(){
         //  return $this->redirectifAuthenticated(page:'login');
         return view('login');
