@@ -10,7 +10,9 @@
 
                 <!-- User Meta -->
                 <div>
-                    <h1 class="font-bold md:text-2xl">Ahmed Shamim Hasan Shaon</h1>
+                    <h1 class="font-bold md:text-2xl">
+                        {{ Auth::check() ? Auth::user()->first_name . ' ' . Auth::user()->last_name : null }}</h1>
+                    </h1>
                     <p class="text-gray-700">Less Talk, More Code 💻</p>
                 </div>
                 <!-- / User Meta -->
