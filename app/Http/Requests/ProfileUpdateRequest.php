@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ProfileUpdateRequest extends FormRequest
 {
@@ -23,11 +24,11 @@ class ProfileUpdateRequest extends FormRequest
     {
         return [
             //
-            'first_name' => 'string|min:5|max:100',
-            'last_name' =>'string|min:5|max:100',
-            'email' => 'email',
-             'password'=>'min:8',
-              'bio'=>'min:10|max:100'
+            'first_name' => 'required|string|min:5|max:100|nullable',
+            'last_name' => 'required|string|min:5|max:100|nullable',
+             'bio'      => 'required|string|nullable',
+
+             'password'=>'min:8|nullable'
         ];
     }
 }

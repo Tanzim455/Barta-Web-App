@@ -33,6 +33,13 @@
                                         value="{{ Auth::user()?->first_name }}"
                                         class="block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6" />
                                 </div>
+                                @error('first_name')
+                                    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                                        role="alert">
+                                        <span class="font-medium">{{ $message }}</span>
+
+                                    </div>
+                                @enderror
                             </div>
 
                             <div class="sm:col-span-3">
@@ -43,6 +50,13 @@
                                         value="{{ Auth::user()?->last_name }}" autocomplete="family-name"
                                         class="block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6" />
                                 </div>
+                                @error('last_name')
+                                    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                                        role="alert">
+                                        <span class="font-medium">{{ $message }}</span>
+
+                                    </div>
+                                @enderror
                             </div>
 
                             <div class="col-span-full">
@@ -53,6 +67,13 @@
                                         value="{{ Auth::user()?->email }}"
                                         class="block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6" />
                                 </div>
+                                @error('email')
+                                    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                                        role="alert">
+                                        <span class="font-medium">{{ $message }}</span>
+
+                                    </div>
+                                @enderror
                             </div>
 
                             <div class="col-span-full">
@@ -62,6 +83,13 @@
                                     <input type="password" name="password" id="password" autocomplete="password"
                                         class="block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6" />
                                 </div>
+                                @error('password')
+                                    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                                        role="alert">
+                                        <span class="font-medium">{{ $message }}</span>
+
+                                    </div>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -74,6 +102,13 @@
                                     class="block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6">
                                     {{ Auth::user()?->bio }} </textarea>
                             </div>
+                            @error('bio')
+                                <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                                    role="alert">
+                                    <span class="font-medium">{{ $message }}</span>
+
+                                </div>
+                            @enderror
                             <p class="mt-3 text-sm leading-6 text-gray-600">
                                 Write a few sentences about yourself.
                             </p>

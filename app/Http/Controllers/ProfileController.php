@@ -26,7 +26,7 @@ class ProfileController extends Controller
         $user->email = $request->input('email');
         $user->bio = $request->input('bio');
         $user->password =$request->input('password');
-        $user->save();
+        $user->update();
 
        return redirect()->back()->with('success','Your profile has been updated successfully');
 
