@@ -16,7 +16,7 @@ class ProfileController extends Controller
     public function profile(){
         return view('profile');
     }
-    public function updateprofile(Request $request){
+    public function updateprofile(ProfileUpdateRequest $request){
 
 
         $user = User::findOrFail(Auth::user()?->id);

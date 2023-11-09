@@ -22,8 +22,8 @@ Route::get('register',[AuthController::class,'registerpage'])->name('registerpag
 Route::post('register',[AuthController::class,'register'])->name('register');
 Route::get('login',[AuthController::class,'loginpage'])->name('loginpage');
 Route::post('login',[AuthController::class,'login'])->name('login');
-Route::get('edit-profile',[ProfileController::class,'editprofile'])->name('edit-profile');
-Route::post('update-profile',[ProfileController::class,'updateprofile'])->name('update-profile');
+Route::get('edit-profile',[ProfileController::class,'editprofile'])->name('edit-profile')->middleware('auth');
+Route::post('update-profile',[ProfileController::class,'updateprofile'])->name('update-profile')->middleware('auth');
 Route::get('profile',[ProfileController::class,'profile'])->name('viewprofile')->middleware('auth');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
