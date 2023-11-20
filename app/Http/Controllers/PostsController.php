@@ -11,6 +11,10 @@ class PostsController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+        $this->middleware('auth')->only(['edit','update','destroy']);
+    }
     public function index()
     {
         //
@@ -31,7 +35,7 @@ class PostsController extends Controller
     {
         //
         $request->validate([
-            'description' => 'required|max:255',
+            'description' => 'required|max:1000',
         ]);
     
         $userId = Auth::user()?->id;
@@ -70,17 +74,32 @@ class PostsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $uuid)
     {
         //
+        $post = DB::table('posts')->where('uuid',$uuid)->first();
+        return view('posts.edit',['post' => $post]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $uuid)
     {
         //
+        $request->validate([
+            'description' => 'required|max:1000',
+        ]);
+
+        DB::table('posts')
+                ->where('uuid',$uuid)
+                ->update([
+                    'description' => $request->description
+                ]);
+
+        return redirect()
+            ->back()
+            ->with('success','Post Updated');
     }
 
     /**
