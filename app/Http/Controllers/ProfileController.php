@@ -32,7 +32,7 @@ class ProfileController extends Controller
 
     DB::table('users')
         ->where('id', $id)
-        ->update($request->validated());
+        ->update($requestData);
 
     return redirect()->back()->with('success', 'Your profile has been updated successfully');
 }
