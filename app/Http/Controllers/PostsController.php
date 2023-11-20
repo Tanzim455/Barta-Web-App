@@ -14,6 +14,11 @@ class PostsController extends Controller
     public function index()
     {
         //
+        $posts= DB::table('posts')
+        ->join('users', 'posts.user_id', '=', 'users.id')
+        ->get();
+         
+        return view('index',compact('posts'));
     }
 
     /**
@@ -37,6 +42,9 @@ class PostsController extends Controller
             'uuid'=>$uuId
 
         ]);
+        return redirect()
+        ->back()
+        ->with('success','Post added successfully');
     }
 
     /**
@@ -69,5 +77,9 @@ class PostsController extends Controller
     public function destroy(string $id)
     {
         //
+        DB::table('posts')->where('id',$id)->delete();
+        return redirect()
+            ->back()
+            ->with('success','Country deleted');
     }
 }

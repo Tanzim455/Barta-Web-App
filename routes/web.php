@@ -17,9 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-})->name('home')->middleware('auth');
+Route::get('/',[PostsController::class,'index']);
 
  
 
