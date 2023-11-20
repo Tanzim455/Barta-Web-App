@@ -6,6 +6,7 @@ use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ProfileController extends Controller
 {
@@ -17,21 +18,19 @@ class ProfileController extends Controller
         return view('profile');
     }
     public function updateprofile(ProfileUpdateRequest $request){
-
-
-        $user = User::findOrFail(Auth::user()?->id);
-
-        $user->first_name =$request->input('first_name');
-        $user->last_name = $request->input('last_name');
-        $user->email = $request->input('email');
-        $user->bio = $request->input('bio');
-        $user->password =$request->input('password');
-        $user->update();
-
-       return redirect()->back()->with('success','Your profile has been updated successfully');
-
-
-
-
+        $id = Auth::user()?->id;
+    
+        DB::table('users')
+            ->where('id', $id)
+            ->update([
+                'first_name' => $request->input('first_name'),
+                'last_name' => $request->input('last_name'),
+                'email' => $request->input('email'),
+                'bio' => $request->input('bio'),
+                'password' =>$request->input('password')
+            ]);
+    
+        return redirect()->back()->with('success','Your profile has been updated successfully');
     }
+    
 }
