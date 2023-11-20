@@ -29,11 +29,11 @@
                                 <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">First
                                     name</label>
                                 <div class="mt-2">
-                                    <input type="text" name="first_name" id="first-name" autocomplete="given-name"
-                                        value="{{ Auth::user()?->first_name }}"
+                                    <input type="text" name="name" id="first-name" autocomplete="given-name"
+                                        value="{{ Auth::user()?->name }}"
                                         class="block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6" />
                                 </div>
-                                @error('first_name')
+                                @error('name')
                                     <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
                                         role="alert">
                                         <span class="font-medium">{{ $message }}</span>
@@ -46,11 +46,11 @@
                                 <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">Last
                                     name</label>
                                 <div class="mt-2">
-                                    <input type="text" name="last_name" id="last-name"
-                                        value="{{ Auth::user()?->last_name }}" autocomplete="family-name"
+                                    <input type="text" name="username" id="last-name"
+                                        value="{{ Auth::user()?->username }}" autocomplete="family-name"
                                         class="block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6" />
                                 </div>
-                                @error('last_name')
+                                @error('username')
                                     <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
                                         role="alert">
                                         <span class="font-medium">{{ $message }}</span>
