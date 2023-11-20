@@ -26,7 +26,7 @@ class ProfileUpdateRequest extends FormRequest
             'first_name' => 'string|min:5|max:100',
             'last_name' =>'string|min:5|max:100',
             'email' => 'email',
-            'password' => 'string|min:8',
+            'password' => 'nullable|string|min:8',
               'bio'=>'min:10|max:100'
         ];
     }
