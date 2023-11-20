@@ -50,10 +50,22 @@ class PostsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $uuid)
     {
         //
-    }
+        
+            $post = DB::table('posts')
+            ->join('users','posts.user_id','users.id')
+            ->where('uuid',$uuid)->first();
+             
+            if ($post) {
+                return view('posts.single', ['post' => $post]);
+            } else {
+                return redirect('/posts');
+            }
+        }
+    
+    
 
     /**
      * Show the form for editing the specified resource.
