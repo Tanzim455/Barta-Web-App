@@ -22,20 +22,17 @@ class ProfileController extends Controller
 {
     $id = Auth::user()?->id;
 
-    $updateData = [
-        'first_name' => $request->input('first_name'),
-        'last_name' => $request->input('last_name'),
-        'email' => $request->input('email'),
-        'bio' => $request->input('bio'),
-    ];
+   
+    $requestData = $request->validated();
 
     if ($request->filled('password')) {
-        $updateData['password'] = Hash::make($request->input('password'));
+        $requestData['password'] = Hash::make($request->input('password'));
     }
+
 
     DB::table('users')
         ->where('id', $id)
-        ->update($updateData);
+        ->update($request->validated());
 
     return redirect()->back()->with('success', 'Your profile has been updated successfully');
 }
