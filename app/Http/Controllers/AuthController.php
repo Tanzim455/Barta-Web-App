@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -15,13 +16,30 @@ class AuthController extends Controller
     public function registerpage(){
         return $this->redirectifAuthenticated(page:'register');
     }
-    public function register(RegisterRequest $request){
-
-        $user=DB::table('users')->insert($request->validated());
-        if($user){
-            return to_route('register')->with('success', 'You are succesfully registered');
+    
+    
+    public function register(RegisterRequest $request)
+    {
+        //Validating all data
+        $requestData = $request->validated();
+    
+        // Hash the password if provided
+        $hashedPassword = Hash::make($request->password);
+     
+        //Change the value of password to hashed password
+        $requestData['password']=$hashedPassword;
+        
+    
+        // Insert the user data into the 'users' table
+         $user = DB::table('users')->insert($requestData);
+    
+        if ($user) {
+            return redirect()->route('register')->with('success', 'You are successfully registered');
+        } else {
+            return redirect()->route('register')->with('error', 'Registration failed');
         }
     }
+    
     public function redirectifAuthenticated(string $page){
         if(Auth::check()){
             return redirect()->back();
