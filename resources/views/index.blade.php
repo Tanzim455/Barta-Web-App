@@ -109,7 +109,7 @@
                                     
                                        
                                         <a>
-                                            <form method="POST" action="{{ route('posts.destroy',$post->id) }}">
+                                            <form method="POST" action="{{ route('posts.destroy',$post->uuid) }}">
                                                 @csrf
                                                 @method('delete')
                                                 <button 

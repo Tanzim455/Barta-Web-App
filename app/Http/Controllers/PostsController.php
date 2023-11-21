@@ -14,7 +14,7 @@ class PostsController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->only(['edit', 'update', 'destroy']);
+        $this->middleware('auth');
     }
 
     public function index()
@@ -107,13 +107,14 @@ class PostsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($uuid)
     {
         //
-        DB::table('posts')->where('id', $id)->delete();
+
+        DB::table('posts')->where('uuid', $uuid)->delete();
 
         return redirect()
             ->back()
-            ->with('success', 'Country deleted');
+            ->with('success', 'Your post has been deleted');
     }
 }

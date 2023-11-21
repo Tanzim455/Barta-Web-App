@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class ProfileUpdateRequest extends FormRequest
 {
@@ -23,8 +25,13 @@ class ProfileUpdateRequest extends FormRequest
     {
         return [
             //
-            'first_name' => 'string|min:5|max:100',
-            'last_name' => 'string|min:5|max:100',
+            'name' => 'string|min:5|max:100',
+            'username' => [
+                'string',
+                'min:5',
+                'max:100',
+                Rule::unique('users')->ignore(Auth::user()->username, 'username'),
+            ],
             'email' => 'email',
             'password' => 'nullable|min:8',
             'bio' => 'min:10|max:100',
