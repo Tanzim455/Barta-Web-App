@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+
 class PostsController extends Controller
 {
     /**
@@ -13,22 +14,23 @@ class PostsController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->only(['edit','update','destroy']);
+        $this->middleware('auth')->only(['edit', 'update', 'destroy']);
     }
+
     public function index()
     {
         //
-        $posts= DB::table('posts')
-        ->join('users', 'posts.user_id', '=', 'users.id')
-        ->get();
-         
-        return view('index',compact('posts'));
+        $posts = DB::table('posts')
+            ->join('users', 'posts.user_id', '=', 'users.id')
+            ->get();
+
+        return view('index', compact('posts'));
     }
 
     /**
      * Show the form for creating a new resource.
-    
-    
+
+
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -37,18 +39,19 @@ class PostsController extends Controller
         $request->validate([
             'description' => 'required|max:1000',
         ]);
-    
+
         $userId = Auth::user()?->id;
-        $uuId=Str::uuid()->toString();
+        $uuId = Str::uuid()->toString();
         DB::table('posts')->insert([
             'description' => $request->input('description'),
             'user_id' => $userId,
-            'uuid'=>$uuId
+            'uuid' => $uuId,
 
         ]);
+
         return redirect()
-        ->back()
-        ->with('success','Post added successfully');
+            ->back()
+            ->with('success', 'Post added successfully');
     }
 
     /**
@@ -57,19 +60,17 @@ class PostsController extends Controller
     public function show(string $uuid)
     {
         //
-        
-            $post = DB::table('posts')
-            ->join('users','posts.user_id','users.id')
-            ->where('uuid',$uuid)->first();
-             
-            if ($post) {
-                return view('posts.single', ['post' => $post]);
-            } else {
-                return redirect('/posts');
-            }
+
+        $post = DB::table('posts')
+            ->join('users', 'posts.user_id', 'users.id')
+            ->where('uuid', $uuid)->first();
+
+        if ($post) {
+            return view('posts.single', ['post' => $post]);
+        } else {
+            return redirect('/posts');
         }
-    
-    
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -77,8 +78,9 @@ class PostsController extends Controller
     public function edit(string $uuid)
     {
         //
-        $post = DB::table('posts')->where('uuid',$uuid)->first();
-        return view('posts.edit',['post' => $post]);
+        $post = DB::table('posts')->where('uuid', $uuid)->first();
+
+        return view('posts.edit', ['post' => $post]);
     }
 
     /**
@@ -92,14 +94,14 @@ class PostsController extends Controller
         ]);
 
         DB::table('posts')
-                ->where('uuid',$uuid)
-                ->update([
-                    'description' => $request->description
-                ]);
+            ->where('uuid', $uuid)
+            ->update([
+                'description' => $request->description,
+            ]);
 
         return redirect()
             ->back()
-            ->with('success','Post Updated');
+            ->with('success', 'Post Updated');
     }
 
     /**
@@ -108,9 +110,10 @@ class PostsController extends Controller
     public function destroy(string $id)
     {
         //
-        DB::table('posts')->where('id',$id)->delete();
+        DB::table('posts')->where('id', $id)->delete();
+
         return redirect()
             ->back()
-            ->with('success','Country deleted');
+            ->with('success', 'Country deleted');
     }
 }
