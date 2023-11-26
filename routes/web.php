@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,31 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [PostsController::class, 'index']);
-
-Route::controller(AuthController::class)->group(function () {
-    Route::get('register', 'registerpage')->name('registerpage');
-    Route::post('register', 'register')->name('register');
-    Route::get('login', 'loginpage')->name('loginpage');
-    Route::post('login', 'login')->name('login');
-
-    Route::get('logout', 'logout')->name('logout');
-
+Route::get('/', function () {
+    return view('welcome');
 });
 
-Route::controller(ProfileController::class)->group(function () {
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-    // Route::get('profile', 'profile')->name('viewprofile')->middleware('auth');
-    Route::middleware('auth')->group(function () {
-        Route::get('edit-profile', 'editprofile')->name('edit-profile');
-        Route::post('update-profile', 'updateprofile')->name('update-profile');
-        Route::get('profile', [ProfileController::class, 'profile'])->name('viewprofile');
-
-    });
-
-    // Route::post('posts',[PostsController::class,'store'])
-    // ->name('posts.store')
-    // ->middleware('auth');
-    Route::resource('posts', PostsController::class);
-
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+require __DIR__.'/auth.php';

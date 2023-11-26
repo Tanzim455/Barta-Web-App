@@ -12,7 +12,7 @@
             </h1>
         </div>
         @if (session('success'))
-            <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400">
+            <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50">
                 <span class="font-medium"> {{ session('success') }}</span>
 
             </div>
@@ -29,7 +29,7 @@
                             required
                             class="block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6" />
                         @error('name')
-                            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50"
                                 role="alert">
                                 <span class="font-medium">{{ $message }}</span>
 
@@ -46,7 +46,7 @@
                             required
                             class="block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6" />
                         @error('username')
-                            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50"
                                 role="alert">
                                 <span class="font-medium">{{ $message }}</span>
 
@@ -63,7 +63,7 @@
                             placeholder="alp.arslan@mail.com" required
                             class="block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6" />
                         @error('email')
-                            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50"
                                 role="alert">
                                 <span class="font-medium">{{ $message }}</span>
 
@@ -79,7 +79,7 @@
                         <input id="password" name="password" type="password" required
                             class="block w-full rounded-md border-0 p-2 p-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6" />
                         @error('password')
-                            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50"
                                 role="alert">
                                 <span class="font-medium">{{ $message }}</span>
 
@@ -98,7 +98,7 @@
 
             <p class="mt-10 text-center text-sm text-gray-500">
                 Already a member?
-                <a href="{{ route('loginpage') }}" class="font-semibold leading-6 text-black hover:text-black">Sign
+                <a href="" class="font-semibold leading-6 text-black hover:text-black">Sign
                     In</a>
             </p>
         </div>

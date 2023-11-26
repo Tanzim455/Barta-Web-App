@@ -3,7 +3,7 @@
     <main class="container max-w-xl mx-auto space-y-8 mt-8 px-2 md:px-0 min-h-screen">
         <!-- Profile Edit Form -->
         @if (session('success'))
-            <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400">
+            <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50">
                 <span class="font-medium"> {{ session('success') }}</span>
 
             </div>
@@ -34,7 +34,7 @@
                                         class="block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6" />
                                 </div>
                                 @error('name')
-                                    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                                    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50"
                                         role="alert">
                                         <span class="font-medium">{{ $message }}</span>
 
@@ -51,7 +51,7 @@
                                         class="block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6" />
                                 </div>
                                 @error('username')
-                                    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                                    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50"
                                         role="alert">
                                         <span class="font-medium">{{ $message }}</span>
 
@@ -68,7 +68,7 @@
                                         class="block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6" />
                                 </div>
                                 @error('email')
-                                    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                                    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50"
                                         role="alert">
                                         <span class="font-medium">{{ $message }}</span>
 
@@ -86,7 +86,7 @@
                                         class="block w-full rounded-md border-0 p-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6" />
                                 </div>
                                 @error('password')
-                                    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                                    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50"
                                         role="alert">
                                         <span class="font-medium">{{ $message }}</span>
 
@@ -105,7 +105,7 @@
                                     {{ Auth::user()?->bio }} </textarea>
                             </div>
                             @error('bio')
-                                <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                                <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50"
                                     role="alert">
                                     <span class="font-medium">{{ $message }}</span>
 
