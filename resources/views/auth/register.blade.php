@@ -1,5 +1,4 @@
-<x-guest-layout>
-    @include('partials.header')
+@include('partials.header')
 
 
 <body class="h-full">
@@ -99,11 +98,9 @@
 
             <p class="mt-10 text-center text-sm text-gray-500">
                 Already a member?
-                <a href="" class="font-semibold leading-6 text-black hover:text-black">Sign
+                <a href="{{'login'}}" class="font-semibold leading-6 text-black hover:text-black">Sign
                     In</a>
             </p>
         </div>
     </div>
 </body>
-
-</x-guest-layout>

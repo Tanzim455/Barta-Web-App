@@ -32,10 +32,6 @@ class RegisteredUserController extends Controller
      */
     public function store(RegisterRequest $request): RedirectResponse
     {
-        
-
-        
-    
         //Validating all data
         $requestData = $request->validated();
 
@@ -50,9 +46,10 @@ class RegisteredUserController extends Controller
 
         if ($user) {
             return redirect()->route('register')->with('success', 'You are successfully registered');
-        } else {
+        } 
+        if (!$user) {
             return redirect()->route('register')->with('error', 'Registration failed');
-        }
+        } 
     }
     }
 

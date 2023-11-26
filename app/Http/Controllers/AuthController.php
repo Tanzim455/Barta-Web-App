@@ -33,9 +33,11 @@ class AuthController extends Controller
 
         if ($user) {
             return redirect()->route('register')->with('success', 'You are successfully registered');
-        } else {
+        } 
+        if (!$user) {
             return redirect()->route('register')->with('error', 'Registration failed');
-        }
+        } 
+        
     }
 
     public function redirectifAuthenticated(string $page)
