@@ -23,7 +23,7 @@ class PostsController extends Controller
         $posts = DB::table('posts')
             ->join('users', 'posts.user_id', '=', 'users.id')
             ->get();
-         
+
         return view('index', compact('posts'));
     }
 
@@ -67,17 +67,17 @@ class PostsController extends Controller
         // dd($post->id);
         //All comments
         $comments = DB::table('comments')
-        ->select('users.name','users.username','comments.description')
-        ->join('users','comments.user_id','users.id')
-        ->where('post_id', $post->id)->get();
-        //Comment count 
-        $count=DB::table('comments')
-        ->select('users.name','users.username','comments.description')
-        ->join('users','comments.user_id','users.id')
-        ->where('post_id', $post->id)->count();
-        
+            ->select('users.name', 'users.username', 'comments.description')
+            ->join('users', 'comments.user_id', 'users.id')
+            ->where('post_id', $post->id)->get();
+        //Comment count
+        $count = DB::table('comments')
+            ->select('users.name', 'users.username', 'comments.description')
+            ->join('users', 'comments.user_id', 'users.id')
+            ->where('post_id', $post->id)->count();
+
         if ($post) {
-            return view('posts.single', ['post' => $post,'comments'=>$comments,'count'=>$count]);
+            return view('posts.single', ['post' => $post, 'comments' => $comments, 'count' => $count]);
         } else {
             return redirect('/posts');
         }
@@ -90,7 +90,7 @@ class PostsController extends Controller
     {
         //
         $post = DB::table('posts')->where('uuid', $uuid)->first();
-        
+
         return view('posts.edit', ['post' => $post]);
     }
 
