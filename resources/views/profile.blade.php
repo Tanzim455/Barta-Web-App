@@ -12,7 +12,7 @@
                 
     <div>
         <h1 class="font-bold md:text-2xl">
-            {{ $user->name }}
+            {{ $user?->name }}
         </h1>
         <p class="text-gray-700">{{ $user->bio ?? 'User bio not available' }}💻</p>
     </div>

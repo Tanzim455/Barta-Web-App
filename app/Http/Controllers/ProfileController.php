@@ -19,19 +19,17 @@ class ProfileController extends Controller
     public function profile($username){
         
     
-            $user=DB::table('users')
-            ->select('users.id', 'users.username',
-             'users.name','users.bio')
-            ->where('users.username',$username)
-            ->first();
-            //Get the first index
-            
-        
-           return view('profile',compact('user'));
-           
-            
+        $user = DB::table('users')
+        ->select('users.id', 'users.username', 'users.name', 'users.bio')
+        ->where('username', $username)
+        ->first();
 
-    }
+        dd($user);
+        // return view('profile',compact('user'));
+       
+        
+
+}
     public function update(ProfileUpdateRequest $request)
     {
         $id = Auth::user()?->id;

@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -16,27 +18,18 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', [PostsController::class, 'index']);
-
-$username="tanzim45";
-// Route::get('test',function() use ($username){
-//       $user=User::findorFail($username);
-//       dd($user);
-// });
-
-Route::get('/{username}',[ProfileController::class,'profile'])->name('profile');
-
+Route::get('/',function(){
+    return view('login');
+});
+Route::get('/home', [PostsController::class, 'index'])->name('home')->middleware('auth');
 
 Route::middleware('auth')->group(function () {
-    Route::get('profile', [ProfileController::class, 'profile'])->name('profile');
+    
     Route::get('edit-profile', [ProfileController::class, 'edit'])->name('edit-profile');
     Route::post('update-profile',[ProfileController::class,'update'])->name('update-profile');
-    
-
-    
-    
-});
+    });
 Route::resource('posts', PostsController::class);
 
 require __DIR__.'/auth.php';
+
+Route::get('/{user}', [ProfileController::class, 'profile'])->where('user', '[A-Za-z0-9_]+');
