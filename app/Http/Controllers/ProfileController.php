@@ -16,11 +16,33 @@ class ProfileController extends Controller
     }
 
     
-    public function profile($username){
+    public function profile($username)
+    {
+        
+        //Fetch all 
+        $user = DB::table('users')
+        ->select('users.id', 'users.username', 'users.name', 'users.bio')
+        ->where('username', $username)
+        ->first();
+         
+        $userposts=DB::table('users')
+        ->select('users.name','users.username','posts.description','posts.uuid')
+        ->join('posts','posts.user_id','users.id')
+        ->where('username', $username)
+        ->get();
+         
+        
+          return view('profile',compact('user','userposts'));
+       
+        
+
+}
+public function singleuserposts($username)
+    {
         
     
         $user = DB::table('users')
-        ->select('users.id', 'users.username', 'users.name', 'users.bio')
+        ->select('users.id', 'users.username', 'users.name', 'users.bio','posts.description')
         ->where('username', $username)
         ->first();
 
