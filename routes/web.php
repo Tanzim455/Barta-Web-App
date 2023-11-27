@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProfileController;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,9 +18,26 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [PostsController::class, 'index']);
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
+$username="tanzim45";
+// Route::get('test',function() use ($username){
+//       $user=User::findorFail($username);
+//       dd($user);
+// });
+
+Route::get('/{username}', function($username) {
+    
+    $user=DB::table('users')
+    ->join('posts', 'posts.user_id', '=', 'users.id')
+    ->select('users.id', 'users.username', 'posts.id', 'posts.description')
+    ->where('users.username',$username)
+    ->get();
+
+    dd($user);
+
+    
+});
+
 
 Route::middleware('auth')->group(function () {
     Route::get('profile', [ProfileController::class, 'profile'])->name('profile');
