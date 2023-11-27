@@ -25,5 +25,7 @@ class CommentController extends Controller
             'post_id' => $request->input('post_id'),
 
         ]);
+
+        return redirect()->back()->with('success','Your comment has been posted successfully');
     }
 }
