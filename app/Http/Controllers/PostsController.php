@@ -64,9 +64,20 @@ class PostsController extends Controller
         $post = DB::table('posts')
             ->join('users', 'posts.user_id', 'users.id')
             ->where('uuid', $uuid)->first();
-
+        // dd($post->id);
+        //All comments
+        $comments = DB::table('comments')
+        ->select('users.name','users.username','comments.description')
+        ->join('users','comments.user_id','users.id')
+        ->where('post_id', $post->id)->get();
+        //Comment count 
+        $count=DB::table('comments')
+        ->select('users.name','users.username','comments.description')
+        ->join('users','comments.user_id','users.id')
+        ->where('post_id', $post->id)->count();
+        
         if ($post) {
-            return view('posts.single', ['post' => $post]);
+            return view('posts.single', ['post' => $post,'comments'=>$comments,'count'=>$count]);
         } else {
             return redirect('/posts');
         }

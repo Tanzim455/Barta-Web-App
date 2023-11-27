@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -29,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::post('update-profile',[ProfileController::class,'update'])->name('update-profile');
     });
 Route::resource('posts', PostsController::class);
+Route::post('comments',[CommentController::class,'store'])->name('comments.store');
 
 require __DIR__.'/auth.php';
 

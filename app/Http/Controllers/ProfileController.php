@@ -19,20 +19,31 @@ class ProfileController extends Controller
     public function profile($username)
     {
         
-        //Fetch all 
+        //Fetch information about users profile
         $user = DB::table('users')
         ->select('users.id', 'users.username', 'users.name', 'users.bio')
         ->where('username', $username)
         ->first();
-         
+         //Fetch information about all post of the user
         $userposts=DB::table('users')
-        ->select('users.name','users.username','posts.description','posts.uuid','posts.user_id')
+        ->select('users.name','users.username','posts.id','posts.description','posts.uuid','posts.user_id')
         ->join('posts','posts.user_id','users.id')
         ->where('username', $username)
         ->get();
+         //Count all post the specific user
+        $countofPosts=DB::table('posts')
+        ->where('posts.user_id',$user->id)->count();
+
+        //Count all comments of specific post of the user
+        $commentsOfUserPostsCount = DB::table('comments')
+        ->select('comments.post_id')
+        ->whereIn('comments.post_id', function ($query) use($user) {
+            $query->select('id')
+                  ->from('posts')
+                  ->where('posts.user_id',$user->id);
+        })->count();
          
-        
-          return view('profile',compact('user','userposts'));
+          return view('profile',compact('user','userposts','countofPosts','commentsOfUserPostsCount'));
        
         
 

@@ -106,8 +106,9 @@
 
           <!-- Barta Create Comment Form -->
           <form
-            action=""
+            action="{{route('comments.store')}}"
             method="POST">
+            @csrf
             <!-- Create Comment Card Top -->
             <div>
               <div class="flex items-start /space-x-3/">
@@ -132,10 +133,13 @@
                     x-init="resize()"
                     @input="resize()"
                     type="text"
-                    name="comment"
+                    name="description"
                     placeholder="Write a comment..."
                     class="flex w-full h-auto min-h-[40px] px-3 py-2 text-sm bg-gray-100 focus:bg-white border border-sm rounded-lg border-neutral-300 ring-offset-background placeholder:text-neutral-400 focus:border-neutral-300 focus:outline-none focus:ring-1 focus:ring-offset-0 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50 text-gray-900"></textarea>
-                </div>
+                    <input type="hidden" id="post_id" name="post_id" class="post-id" value="{{ $post->id }}">
+                    
+                
+                  </div> 
               </div>
             </div>
 
@@ -160,7 +164,66 @@
         <!-- /Barta Card -->
 
         <hr />
-        
+        <div class="flex flex-col space-y-6">
+          <h1 class="text-lg font-semibold">Comments ({{$count}})</h1>
+
+          <!-- Barta User Comments Container -->
+          <article
+            class="bg-white border-2 border-black rounded-lg shadow mx-auto max-w-none px-4 py-2 sm:px-6 min-w-full divide-y">
+            <!-- Comments -->
+
+            <!-- Comment 1 -->
+            @foreach ($comments as $comment)
+            <div class="py-4">
+              <!-- Barta User Comments Top -->
+              <header>
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center space-x-3">
+                    <!-- User Info -->
+                    <div class="text-gray-900 flex flex-col min-w-0 flex-1">
+                      <a
+                        href="profile.html"
+                        class="hover:underline font-semibold line-clamp-1">
+                       {{$comment->name}}
+                      </a>
+
+                      <a
+                        href="profile.html"
+                        class="hover:underline text-sm text-gray-500 line-clamp-1">
+                        @ {{$comment->username}}
+                      </a>
+                    </div>
+                    <!-- /User Info -->
+                  </div>
+                </div>
+              </header>
+
+              <!-- Content -->
+              <div class="py-4 text-gray-700 font-normal">
+                <p>{{$comment->description}}</p>
+              </div>
+
+              <!-- Date Created -->
+              <div class="flex items-center gap-2 text-gray-500 text-xs">
+                <span class="">6m ago</span>
+              </div>
+            </div> 
+            @endforeach
+            
+            <!-- /Comment 1 -->
+
+            <!-- Comment 2 -->
+           
+            <!-- /Comment 2 -->
+
+            <!-- Comment 3 -->
+            
+            <!-- /Comment 3 -->
+
+            <!-- /Comments -->
+          </article>
+          <!-- /Barta User Comments -->
+        </div
       </section>
       <!-- /Newsfeed -->
     </main>
