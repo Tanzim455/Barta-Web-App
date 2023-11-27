@@ -92,13 +92,13 @@
             <!-- User Info -->
             <div class="text-gray-900 flex flex-col min-w-0 flex-1">
               <a
-                href="profile.html"
+                href="{{route('profile',['user'=>$post->username])}}"
                 class="hover:underline font-semibold line-clamp-1">
                 {{$post->name}}
               </a>
 
               <a
-                href="profile.html"
+                href="{{route('profile',['user'=>$post->username])}}"
                 class="hover:underline text-sm text-gray-500 line-clamp-1">
                 @ {{$post->username}}
               </a>
@@ -162,7 +162,7 @@
       </header>
 
       <!-- Content -->
-      <a href="./single.html">
+      <a href="{{route('posts.show',$post->uuid)}}">
         <div class="py-4 text-gray-700 font-normal">
           <p>
             {{$post->description}} 😁
