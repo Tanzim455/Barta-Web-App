@@ -26,7 +26,7 @@ class ProfileController extends Controller
         ->first();
          
         $userposts=DB::table('users')
-        ->select('users.name','users.username','posts.description','posts.uuid')
+        ->select('users.name','users.username','posts.description','posts.uuid','posts.user_id')
         ->join('posts','posts.user_id','users.id')
         ->where('username', $username)
         ->get();
