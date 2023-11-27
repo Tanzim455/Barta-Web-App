@@ -15,11 +15,23 @@ class ProfileController extends Controller
         return view('edit-profile');
     }
 
-    public function profile()
-    {
-        return view('profile');
-    }
+    
+    public function profile($username){
+        
+    
+            $user=DB::table('users')
+            ->select('users.id', 'users.username',
+             'users.name','users.bio')
+            ->where('users.username',$username)
+            ->first();
+            //Get the first index
+            
+        
+           return view('profile',compact('user'));
+           
+            
 
+    }
     public function update(ProfileUpdateRequest $request)
     {
         $id = Auth::user()?->id;

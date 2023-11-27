@@ -9,12 +9,16 @@
 
 
                 <!-- User Meta -->
-                <div>
-                    <h1 class="font-bold md:text-2xl">
-                        {{ Auth::check() ? Auth::user()->name : null }}</h1>
-                    </h1>
-                    <p class="text-gray-700">{{ Auth::check() ? Auth::user()->bio : null }}💻</p>
-                </div>
+                
+    <div>
+        <h1 class="font-bold md:text-2xl">
+            {{ $user->name }}
+        </h1>
+        <p class="text-gray-700">{{ $user->bio ?? 'User bio not available' }}💻</p>
+    </div>
+
+
+                
                 <!-- / User Meta -->
             </div>
 

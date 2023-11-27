@@ -25,18 +25,7 @@ $username="tanzim45";
 //       dd($user);
 // });
 
-Route::get('/{username}', function($username) {
-    
-    $user=DB::table('users')
-    ->join('posts', 'posts.user_id', '=', 'users.id')
-    ->select('users.id', 'users.username', 'posts.id', 'posts.description')
-    ->where('users.username',$username)
-    ->get();
-
-    dd($user);
-
-    
-});
+Route::get('/{username}',[ProfileController::class,'profile'])->name('profile');
 
 
 Route::middleware('auth')->group(function () {
