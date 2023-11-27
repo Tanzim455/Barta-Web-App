@@ -24,8 +24,8 @@ class ProfileController extends Controller
         ->where('username', $username)
         ->first();
 
-        dd($user);
-        // return view('profile',compact('user'));
+        
+         return view('profile',compact('user'));
        
         
 

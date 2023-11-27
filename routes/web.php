@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/',function(){
     return view('login');
-});
+})->middleware('guest');
 Route::get('/home', [PostsController::class, 'index'])->name('home')->middleware('auth');
 
 Route::middleware('auth')->group(function () {
@@ -32,4 +32,4 @@ Route::resource('posts', PostsController::class);
 
 require __DIR__.'/auth.php';
 
-Route::get('/{user}', [ProfileController::class, 'profile'])->where('user', '[A-Za-z0-9_]+');
+Route::get('/{user}', [ProfileController::class, 'profile'])->where('user', '[A-Za-z0-9_]+')->name('profile');
