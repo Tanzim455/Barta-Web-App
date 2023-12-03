@@ -169,12 +169,14 @@
           <h1 class="text-lg font-semibold">Comments ({{$count}})</h1>
 
           <!-- Barta User Comments Container -->
+          @if(isset($comments) && !empty($comments))
+          @foreach ($comments as $comment)
           <article
             class="bg-white border-2 border-black rounded-lg shadow mx-auto max-w-none px-4 py-2 sm:px-6 min-w-full divide-y">
             <!-- Comments -->
 
             <!-- Comment 1 -->
-            @foreach ($comments as $comment)
+          
             <div class="py-4">
               <!-- Barta User Comments Top -->
               <header>
@@ -210,7 +212,7 @@
               </div>
             </div> 
             @endforeach
-            
+            @endif
             <!-- /Comment 1 -->
 
             <!-- Comment 2 -->
