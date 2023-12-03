@@ -129,8 +129,11 @@ class PostsController extends Controller
     public function destroy($uuid)
     {
         //
-
-        DB::table('posts')->where('uuid', $uuid)->delete();
+        $post = DB::table('posts')->where('uuid', $uuid)->first();
+        DB::transaction(function () use ($post) {
+            DB::table('comments')->where('post_id', $post->id)->delete();
+            DB::table('posts')->where('id', $post->id)->delete();
+        });
 
         return redirect()
             ->back()

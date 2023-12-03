@@ -176,7 +176,7 @@
             <!-- Comments -->
 
             <!-- Comment 1 -->
-          
+           
             <div class="py-4">
               <!-- Barta User Comments Top -->
               <header>
@@ -211,20 +211,11 @@
                 <span class="">6m ago</span>
               </div>
             </div> 
-            @endforeach
-            @endif
-            <!-- /Comment 1 -->
-
-            <!-- Comment 2 -->
            
-            <!-- /Comment 2 -->
-
-            <!-- Comment 3 -->
-            
-            <!-- /Comment 3 -->
-
-            <!-- /Comments -->
+           
           </article>
+          @endforeach
+          @endif
           <!-- /Barta User Comments -->
         </div
       </section>
