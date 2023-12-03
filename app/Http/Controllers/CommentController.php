@@ -26,6 +26,6 @@ class CommentController extends Controller
 
         ]);
 
-        return redirect()->back()->with('success','Your comment has been posted successfully');
+        return redirect()->back()->with('success', 'Your comment has been posted successfully');
     }
 }

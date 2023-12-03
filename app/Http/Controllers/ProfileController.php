@@ -20,12 +20,12 @@ class ProfileController extends Controller
     {
 
         //Fetch information about users profile
-        
+
         $user = DB::table('users')
             ->select('users.id', 'users.username', 'users.name', 'users.bio')
             ->where('username', $username)
             ->first();
-        
+
         $countofPosts = DB::table('posts')
             ->where('posts.user_id', $user->id)->count();
 
@@ -37,30 +37,27 @@ class ProfileController extends Controller
                     ->from('posts')
                     ->where('posts.user_id', $user->id);
             })->count();
-            //All user posts with comment count
-            $userposts = DB::table('posts')
+        //All user posts with comment count
+        $userposts = DB::table('posts')
             ->join('users', 'users.id', '=', 'posts.user_id')
             ->leftJoin('comments', 'comments.post_id', '=', 'posts.id')
             ->where('users.username', $username)
-            ->select('posts.id', 
-             'posts.uuid',
-            'posts.description',
-            'posts.user_id',
-            'users.id',
-            'users.username','users.name',
-            DB::raw('count(comments.id) as comments_count'))
-            ->groupBy('posts.id', 
-            'posts.description',
-            'posts.user_id',
-            'posts.uuid',
-            'users.id','users.username','users.name')
+            ->select('posts.id',
+                'posts.uuid',
+                'posts.description',
+                'posts.user_id',
+                'users.id',
+                'users.username', 'users.name',
+                DB::raw('count(comments.id) as comments_count'))
+            ->groupBy('posts.id',
+                'posts.description',
+                'posts.user_id',
+                'posts.uuid',
+                'users.id', 'users.username', 'users.name')
             ->get();
 
-
-       
-            
-           //Find all comment count of posts with specific username
-           //Find all comments count of 
+        //Find all comment count of posts with specific username
+        //Find all comments count of
         return view('profile', compact('user', 'userposts', 'countofPosts', 'commentsOfUserPostsCount'));
 
     }
