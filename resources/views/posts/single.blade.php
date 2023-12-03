@@ -22,15 +22,15 @@
                 <!-- User Info -->
                 <div class="text-gray-900 flex flex-col min-w-0 flex-1">
                   <a
-                     href="{{route('profile',['user'=>$post->username])}}"
+                     href="{{route('profile',['user'=>$postuserdetails->username])}}"
                     class="hover:underline font-semibold line-clamp-1">
-                    {{$post->name}}
+                    {{$postuserdetails->name}}
                   </a>
 
                   <a
-                  href="{{route('profile',['user'=>$post->username])}}"
+                  href="{{route('profile',['user'=>$postuserdetails->username])}}"
                     class="hover:underline text-sm text-gray-500 line-clamp-1">
-                    @ {{$post->username}}
+                    @ {{$postuserdetails->username}}
                   </a>
                 </div>
                 <!-- /User Info -->
@@ -54,7 +54,7 @@
                         </button>
                     </div>
                     <!-- Dropdown menu -->
-                    @if (Auth()->user()?->id===$post->user_id)
+                    @if (Auth()->user()?->id===$postuserdetails->user_id)
                     <div x-show="open" @click.away="open = false"
                         class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                         role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button"
@@ -62,7 +62,7 @@
                         
                            
                             <a>
-                                <form method="POST" action="{{ route('posts.destroy',$post->uuid) }}">
+                                <form method="POST" action="{{ route('posts.destroy',$postuserdetails->uuid) }}">
                                     @csrf
                                     @method('delete')
                                     <button 
@@ -70,7 +70,7 @@
                                     type="submit">Delete</button>
                                 </form>
                             </a>
-                            <a href="{{route('posts.edit',$post->uuid)}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                            <a href="{{route('posts.edit',$postuserdetails->uuid)}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             role="menuitem" tabindex="-1" id="user-menu-item-0">Edit</a>
                            
                             
@@ -88,7 +88,7 @@
           <!-- Content -->
           <div class="py-4 text-gray-700 font-normal">
             <p>
-              {{$post->description}}
+              {{$postuserdetails->description}}
               
             </p>
           </div>
@@ -136,7 +136,8 @@
                     name="description"
                     placeholder="Write a comment..."
                     class="flex w-full h-auto min-h-[40px] px-3 py-2 text-sm bg-gray-100 focus:bg-white border border-sm rounded-lg border-neutral-300 ring-offset-background placeholder:text-neutral-400 focus:border-neutral-300 focus:outline-none focus:ring-1 focus:ring-offset-0 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50 text-gray-900"></textarea>
-                    <input type="hidden" id="post_id" name="post_id" class="post-id" value="{{ $post->id }}">
+                    <input type="hidden" id="post_id" name="post_id" class="post-id" value="{{ $postuserdetails
+                    ->id }}">
                     
                 
                   </div> 

@@ -62,19 +62,25 @@ class PostsController extends Controller
         //
         //Get users of single post
         $post = DB::table('posts')
-             ->join('users', 'posts.user_id', 'users.id')
-            ->where('uuid', $uuid)->get()->first();
+        ->select('posts.id')
+             ->where('uuid', $uuid)
+             ->first();
+       //dump($post->id);
+       
+        $postuserdetails=DB::table('posts')
         
-        //  dd($post->id);
-        //All comments
-        
+        ->join('users','posts.user_id','users.id')
+        ->select('users.name','users.username','posts.id','posts.user_id','posts.uuid','posts.description')
+        ->where('posts.id',$post->id)->first();
+
+ 
         $comments = DB::table('comments')
         ->select('users.name', 'users.username', 'comments.description')
         ->join('users', 'comments.user_id', 'users.id')
             
             ->where('comments.post_id', $post->id)->get();
         //Comment count
-      
+        
         $count = DB::table('comments')
             ->select('users.name', 'users.username', 'comments.description')
             ->join('users', 'comments.user_id', 'users.id')
@@ -82,7 +88,7 @@ class PostsController extends Controller
             
             
         if ($post) {
-            return view('posts.single', ['post' => $post, 'comments' => $comments, 'count' => $count]);
+            return view('posts.single', ['postuserdetails' => $postuserdetails, 'comments' => $comments, 'count' => $count]);
         } else {
             return redirect('/posts');
         }
