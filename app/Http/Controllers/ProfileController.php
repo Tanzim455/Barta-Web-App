@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -19,10 +20,13 @@ class ProfileController extends Controller
     {
 
         //Fetch information about users profile
+        
         $user = DB::table('users')
             ->select('users.id', 'users.username', 'users.name', 'users.bio')
             ->where('username', $username)
             ->first();
+
+            
         //Fetch information about all post of the user
         $userposts = DB::table('users')
             ->select('users.name', 'users.username', 'posts.id', 'posts.description', 'posts.uuid', 'posts.user_id')
@@ -41,7 +45,7 @@ class ProfileController extends Controller
                     ->from('posts')
                     ->where('posts.user_id', $user->id);
             })->count();
-
+           
         return view('profile', compact('user', 'userposts', 'countofPosts', 'commentsOfUserPostsCount'));
 
     }

@@ -60,22 +60,27 @@ class PostsController extends Controller
     public function show(string $uuid)
     {
         //
-
+        //Get users of single post
         $post = DB::table('posts')
-            ->join('users', 'posts.user_id', 'users.id')
-            ->where('uuid', $uuid)->first();
-        // dd($post->id);
+             ->join('users', 'posts.user_id', 'users.id')
+            ->where('uuid', $uuid)->get()->first();
+        
+        //  dd($post->id);
         //All comments
+        
         $comments = DB::table('comments')
-            ->select('users.name', 'users.username', 'comments.description')
-            ->join('users', 'comments.user_id', 'users.id')
-            ->where('post_id', $post->id)->get();
+        ->select('users.name', 'users.username', 'comments.description')
+        ->join('users', 'comments.user_id', 'users.id')
+            
+            ->where('comments.post_id', $post->id)->get();
         //Comment count
+      
         $count = DB::table('comments')
             ->select('users.name', 'users.username', 'comments.description')
             ->join('users', 'comments.user_id', 'users.id')
             ->where('post_id', $post->id)->count();
-
+            
+            
         if ($post) {
             return view('posts.single', ['post' => $post, 'comments' => $comments, 'count' => $count]);
         } else {

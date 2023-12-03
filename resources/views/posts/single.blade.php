@@ -22,13 +22,13 @@
                 <!-- User Info -->
                 <div class="text-gray-900 flex flex-col min-w-0 flex-1">
                   <a
-                    href="profile.html"
+                     href="{{route('profile',['user'=>$post->username])}}"
                     class="hover:underline font-semibold line-clamp-1">
                     {{$post->name}}
                   </a>
 
                   <a
-                    href="profile.html"
+                  href="{{route('profile',['user'=>$post->username])}}"
                     class="hover:underline text-sm text-gray-500 line-clamp-1">
                     @ {{$post->username}}
                   </a>
@@ -182,13 +182,13 @@
                     <!-- User Info -->
                     <div class="text-gray-900 flex flex-col min-w-0 flex-1">
                       <a
-                        href="profile.html"
+                      href="{{route('profile',['user'=>$comment->username])}}"
                         class="hover:underline font-semibold line-clamp-1">
-                       {{$comment->name}}
+                         {{$comment->name}}
                       </a>
 
                       <a
-                        href="profile.html"
+                      href="{{route('profile',['user'=>$comment->username])}}"
                         class="hover:underline text-sm text-gray-500 line-clamp-1">
                         @ {{$comment->username}}
                       </a>
