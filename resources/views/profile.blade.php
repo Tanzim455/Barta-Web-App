@@ -16,7 +16,7 @@
         </h1>
         <p class="text-gray-700">{{ $user->bio ?? 'User bio not available' }}💻</p>
     </div>
-    
+  
 
                 
                 <!-- / User Meta -->
@@ -49,12 +49,21 @@
             <!-- /Edit Profile Button -->
             
         </section>
-        
-        <form method="POST" action="{{route('posts.store')}}
+       
+        @if (Auth::user()->id===$user->id)
+        @if (session('success'))
+        <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50">
+            <span class="font-medium"> {{ session('success') }}</span>
+    
+        </div>
+        @endif
+        <form method="POST" action="{{route('posts.store')}}" 
         enctype="multipart/form-data"
         class="bg-white border-2 border-black rounded-lg shadow mx-auto max-w-none px-4 py-5 sm:px-6 space-y-3">
         <!-- Create Post Card Top -->
+        
         @csrf
+       
         <div>
           <div class="flex items-start /space-x-3/">
             <!-- Content -->
@@ -85,7 +94,9 @@
           <!-- /Card Bottom Action Buttons -->
         </div>
         <!-- /Create Post Card Bottom -->
-      </form>
+      </form>  
+        @endif
+       
       @foreach ($userposts as $post)
       <article
       class="bg-white border-2 border-black rounded-lg shadow mx-auto max-w-none px-4 py-5 sm:px-6">

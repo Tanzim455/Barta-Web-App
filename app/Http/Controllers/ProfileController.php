@@ -40,7 +40,7 @@ class ProfileController extends Controller
             //All user posts with comment count
             $userposts = DB::table('posts')
             ->join('users', 'users.id', '=', 'posts.user_id')
-            ->join('comments', 'comments.post_id', '=', 'posts.id')
+            ->leftJoin('comments', 'comments.post_id', '=', 'posts.id')
             ->where('users.username', $username)
             ->select('posts.id', 
              'posts.uuid',
@@ -55,8 +55,9 @@ class ProfileController extends Controller
             'posts.uuid',
             'users.id','users.username','users.name')
             ->get();
-        
 
+
+       
             
            //Find all comment count of posts with specific username
            //Find all comments count of 
