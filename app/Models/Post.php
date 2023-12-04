@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Post extends Model
 {
@@ -27,6 +28,30 @@ class Post extends Model
             'comments.user:id,name,username'
         ]);
     }
+
+  
+    // ...
+
+    public function scopeWithUserCommentsCount($query, $username)
+    {
+        return $query->join('users', 'users.id', '=', 'posts.user_id')
+            ->leftJoin('comments', 'comments.post_id', '=', 'posts.id')
+            ->where('users.username', $username)
+            ->select('posts.id',
+                'posts.uuid',
+                'posts.description',
+                'posts.user_id',
+                'users.id',
+                'users.username', 'users.name',
+                DB::raw('count(comments.id) as comments_count'))
+            ->groupBy('posts.id',
+                'posts.description',
+                'posts.user_id',
+                'posts.uuid',
+                'users.id', 'users.username', 'users.name');
+    }
+
+
     
     public function comments(){
         return $this->hasMany(Comment::class);
