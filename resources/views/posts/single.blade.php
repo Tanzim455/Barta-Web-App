@@ -22,15 +22,15 @@
                 <!-- User Info -->
                 <div class="text-gray-900 flex flex-col min-w-0 flex-1">
                   <a
-                     href="{{route('profile',['user'=>$postuserdetails->username])}}"
+                     href="{{route('profile',['user'=>$postuserdetails->user->name])}}"
                     class="hover:underline font-semibold line-clamp-1">
-                    {{$postuserdetails->name}}
+                    {{$postuserdetails->user->name}}
                   </a>
 
                   <a
-                  href="{{route('profile',['user'=>$postuserdetails->username])}}"
+                  href="{{route('profile',['user'=>$postuserdetails->user->name])}}"
                     class="hover:underline text-sm text-gray-500 line-clamp-1">
-                    @ {{$postuserdetails->username}}
+                    @ {{$postuserdetails->user->username}}
                   </a>
                 </div>
                 <!-- /User Info -->
@@ -169,8 +169,9 @@
           <h1 class="text-lg font-semibold">Comments ({{$count}})</h1>
 
           <!-- Barta User Comments Container -->
-          @if(isset($comments) && !empty($comments))
-          @foreach ($comments as $comment)
+         
+          @if(isset($postWithComments->comments) && !empty($postWithComments->comments))
+          @foreach ($postWithComments->comments as $comment)
           <article
             class="bg-white border-2 border-black rounded-lg shadow mx-auto max-w-none px-4 py-2 sm:px-6 min-w-full divide-y">
             <!-- Comments -->
@@ -185,15 +186,15 @@
                     <!-- User Info -->
                     <div class="text-gray-900 flex flex-col min-w-0 flex-1">
                       <a
-                      href="{{route('profile',['user'=>$comment->username])}}"
+                      href="{{route('profile',['user'=>$comment->user->username])}}"
                         class="hover:underline font-semibold line-clamp-1">
-                         {{$comment->name}}
+                         {{$comment->user->name}}
                       </a>
 
                       <a
-                      href="{{route('profile',['user'=>$comment->username])}}"
+                      href="{{route('profile',['user'=>$comment->user->username])}}"
                         class="hover:underline text-sm text-gray-500 line-clamp-1">
-                        @ {{$comment->username}}
+                        @ {{$comment->user->username}}
                       </a>
                     </div>
                     <!-- /User Info -->

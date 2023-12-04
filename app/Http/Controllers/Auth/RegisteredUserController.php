@@ -38,7 +38,7 @@ class RegisteredUserController extends Controller
         $requestData['password'] = $hashedPassword;
 
         // Insert the user data into the 'users' table
-        $user = DB::table('users')->insert($requestData);
+        $user =User::create($requestData);
 
         if ($user) {
             return redirect()->route('register')->with('success', 'You are successfully registered');

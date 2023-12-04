@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -20,10 +22,9 @@ class PostsController extends Controller
     public function index()
     {
         //
-        $posts = DB::table('posts')
-            ->join('users', 'posts.user_id', '=', 'users.id')
-            ->get();
-
+        $posts = Post::with('user')->select('user_id','uuid','description')->orderBy('id','DESC')->paginate(10);
+      
+        
         return view('index', compact('posts'));
     }
 
@@ -42,13 +43,14 @@ class PostsController extends Controller
 
         $userId = Auth::user()?->id;
         $uuId = Str::uuid()->toString();
-        DB::table('posts')->insert([
+       
+        Post::create([
             'description' => $request->input('description'),
             'user_id' => $userId,
             'uuid' => $uuId,
-
-        ]);
-
+        ]
+            
+        );
         return redirect()
             ->back()
             ->with('success', 'Post added successfully');
@@ -60,32 +62,20 @@ class PostsController extends Controller
     public function show(string $uuid)
     {
         //
-        //Get users of single post
-        $post = DB::table('posts')
-            ->select('posts.id')
-            ->where('uuid', $uuid)
-            ->first();
-        //dump($post->id);
-
-        $postuserdetails = DB::table('posts')
-            ->join('users', 'posts.user_id', 'users.id')
-            ->select('users.name', 'users.username', 'posts.id', 'posts.user_id', 'posts.uuid', 'posts.description')
-            ->where('posts.id', $post->id)->first();
-
-        $comments = DB::table('comments')
-            ->select('users.name', 'users.username', 'comments.description')
-            ->join('users', 'comments.user_id', 'users.id')
-
-            ->where('comments.post_id', $post->id)->get();
-        //Comment count
-
-        $count = DB::table('comments')
-            ->select('users.name', 'users.username', 'comments.description')
-            ->join('users', 'comments.user_id', 'users.id')
-            ->where('post_id', $post->id)->count();
+        
+        $post = Post::where('uuid', $uuid)->first();
+        //get user of a single post
+         $postuserdetails =Post::with('user')->findorFail($post->id);
+         //Comment count of posts
+         $count=Post::withCount('comments')->findorFail($post->id)->comments_count;
+         
+        //All comments of post and users who commented
+         $postWithComments=Post::with('comments.user')->findorFail($post->id);
+          
+        
 
         if ($post) {
-            return view('posts.single', ['postuserdetails' => $postuserdetails, 'comments' => $comments, 'count' => $count]);
+            return view('posts.single', ['postuserdetails' => $postuserdetails, 'postWithComments' =>$postWithComments,'count'=>$count ]);
         } else {
             return redirect('/posts');
         }
@@ -97,8 +87,8 @@ class PostsController extends Controller
     public function edit(string $uuid)
     {
         //
-        $post = DB::table('posts')->where('uuid', $uuid)->first();
-
+        $post = Post::where('uuid', $uuid)->first();
+        
         return view('posts.edit', ['post' => $post]);
     }
 
@@ -112,11 +102,8 @@ class PostsController extends Controller
             'description' => 'required|max:1000',
         ]);
 
-        DB::table('posts')
-            ->where('uuid', $uuid)
-            ->update([
-                'description' => $request->description,
-            ]);
+        $post=Post::where('uuid', $uuid);
+        $post->update(['description' => $request->description]);
 
         return redirect()
             ->back()
@@ -129,11 +116,8 @@ class PostsController extends Controller
     public function destroy($uuid)
     {
         //
-        $post = DB::table('posts')->where('uuid', $uuid)->first();
-        DB::transaction(function () use ($post) {
-            DB::table('comments')->where('post_id', $post->id)->delete();
-            DB::table('posts')->where('id', $post->id)->delete();
-        });
+        $post =Post::where('uuid', $uuid)->first();
+        $post->delete();
 
         return redirect()
             ->back()

@@ -34,9 +34,16 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+     public function posts(){
+        return $this->hasMany(Post::class);
+     }
+     public function comments(){
+        return $this->hasMany(Comment::class);
+     }
     /**
      * The attributes that should be cast.
      *
+     
      * @var array<string, string>
      */
     protected $casts = [
