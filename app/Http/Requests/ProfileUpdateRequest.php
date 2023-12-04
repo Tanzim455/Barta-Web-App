@@ -32,6 +32,7 @@ class ProfileUpdateRequest extends FormRequest
                 'max:100',
                 Rule::unique('users')->ignore(Auth::user()->username, 'username'),
             ],
+            'image'=>'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
             'email' => 'email',
             'password' => 'nullable|min:8',
             'bio' => 'min:10|max:100',

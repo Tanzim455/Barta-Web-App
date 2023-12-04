@@ -56,6 +56,11 @@ class ProfileController extends Controller
         if (! $request->filled('password')) {
             unset($requestData['password']);
         }
+        $fileName = time() . '.' . $request->image->extension();
+        $request->image->storeAs('public/profile/images', $fileName);
+        $requestData['image']= $fileName;
+        
+        
 
         User::where('id',$id)->update($requestData);
         return redirect()->back()->with('success', 'Your profile has been updated successfully');

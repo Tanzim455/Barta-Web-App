@@ -24,7 +24,7 @@ class PostsController extends Controller
         
         
         $posts = Post::withUserDetails()
-        ->select('user_id','uuid','description')
+        ->select('user_id','uuid','description','image')
         ->orderBy('id','DESC')->paginate(10);
        
         
@@ -47,13 +47,18 @@ class PostsController extends Controller
         $userId = Auth::user()?->id;
         $uuId = Str::uuid()->toString();
        
-        Post::create([
+        $post=Post::create([
             'description' => $request->input('description'),
             'user_id' => $userId,
             'uuid' => $uuId,
+            'image'=>'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048'
         ]
             
         );
+        $fileName = time() . '.' . $request->image->extension();
+        $request->image->storeAs('public/images', $fileName);
+        $post->image = $fileName;
+        $post->save();
         return redirect()
             ->back()
             ->with('success', 'Post added successfully');
