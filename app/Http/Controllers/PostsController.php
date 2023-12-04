@@ -21,9 +21,12 @@ class PostsController extends Controller
 
     public function index()
     {
-        //
-        $posts = Post::with('user')->select('user_id','uuid','description')->orderBy('id','DESC')->paginate(10);
-      
+        
+        
+        $posts = Post::withUserDetails()
+        ->select('user_id','uuid','description')
+        ->orderBy('id','DESC')->paginate(10);
+       
         
         return view('index', compact('posts'));
     }
@@ -65,15 +68,13 @@ class PostsController extends Controller
         
         $post = Post::where('uuid', $uuid)->first();
         //get user of a single post
-         $postuserdetails =Post::with('user')->findorFail($post->id);
+         $postuserdetails =Post::withUserDetails()->findorFail($post->id);
          //Comment count of posts
          $count=Post::withCount('comments')->findorFail($post->id)->comments_count;
          
-        //All comments of post and users who commented
-         $postWithComments=Post::with('comments.user')->findorFail($post->id);
-          
+         //Get comment count of a post
+         $postWithComments = Post::withUserComments()->findOrFail($post->id);
         
-
         if ($post) {
             return view('posts.single', ['postuserdetails' => $postuserdetails, 'postWithComments' =>$postWithComments,'count'=>$count ]);
         } else {

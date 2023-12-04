@@ -19,6 +19,15 @@ class Post extends Model
             $query->select('id', 'name', 'username');
         }]);
     }
+    public function scopeWithUserComments($query)
+    {
+        return $query->with([
+            
+            'comments:id,post_id,user_id,description', // Specify the columns for the comments relation
+            'comments.user:id,name,username'
+        ]);
+    }
+    
     public function comments(){
         return $this->hasMany(Comment::class);
     }

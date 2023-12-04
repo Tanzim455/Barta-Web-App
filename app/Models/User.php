@@ -40,6 +40,13 @@ class User extends Authenticatable
      public function comments(){
         return $this->hasMany(Comment::class);
      }
+
+     public function scopeWithUserDetails($query)
+    {
+        return $query->with(['user' => function($query) {
+            $query->select('id', 'name', 'username');
+        }]);
+    }
     /**
      * The attributes that should be cast.
      *
