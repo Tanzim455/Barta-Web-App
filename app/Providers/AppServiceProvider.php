@@ -21,10 +21,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
-     
+
         Post::deleting(function ($post) {
             $post->comments()->delete();
         });
     }
-    
 }

@@ -4,7 +4,6 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,5 +30,5 @@ Route::resource('posts', PostsController::class);
 Route::post('comments', [CommentController::class, 'store'])->name('comments.store');
 
 require __DIR__.'/auth.php';
-Route::get('/searchuser',[SearchController::class,'search'])->name('searchuser');
+Route::get('/searchuser', [SearchController::class, 'search'])->name('searchuser');
 Route::get('/{user}', [ProfileController::class, 'profile'])->where('user', '[A-Za-z0-9_]+')->name('profile');

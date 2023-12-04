@@ -7,7 +7,6 @@ use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
@@ -38,7 +37,7 @@ class RegisteredUserController extends Controller
         $requestData['password'] = $hashedPassword;
 
         // Insert the user data into the 'users' table
-        $user =User::create($requestData);
+        $user = User::create($requestData);
 
         if ($user) {
             return redirect()->route('register')->with('success', 'You are successfully registered');

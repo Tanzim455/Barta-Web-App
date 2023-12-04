@@ -36,7 +36,7 @@
                                 id="avatar" />
                               <img
                                 class="h-32 w-32 rounded-full"
-                                src="https://avatars.githubusercontent.com/u/831997"
+                                src="{{ asset('storage/profile/images/'.Auth::user()?->image ) }}"
                                 alt="Ahmed Shamim Hasan Shaon" />
                               <label for="avatar">
                                 <div

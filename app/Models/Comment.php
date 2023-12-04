@@ -8,9 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     use HasFactory;
-    public function user(){
+
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
+
     public function scopeFromUserPosts($query, $userId)
     {
         return $query->select('comments.post_id')
@@ -21,4 +24,3 @@ class Comment extends Model
             });
     }
 }
-

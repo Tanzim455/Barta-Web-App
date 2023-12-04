@@ -34,23 +34,27 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-     public function posts(){
-        return $this->hasMany(Post::class);
-     }
-     public function comments(){
-        return $this->hasMany(Comment::class);
-     }
-
-     public function scopeWithUserDetails($query)
+    public function posts()
     {
-        return $query->with(['user' => function($query) {
+        return $this->hasMany(Post::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function scopeWithUserDetails($query)
+    {
+        return $query->with(['user' => function ($query) {
             $query->select('id', 'name', 'username');
         }]);
     }
+
     /**
      * The attributes that should be cast.
      *
-     
+
      * @var array<string, string>
      */
     protected $casts = [

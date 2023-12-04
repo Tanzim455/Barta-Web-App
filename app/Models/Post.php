@@ -12,27 +12,30 @@ class Post extends Model implements HasMedia
 {
     use HasFactory;
     use InteractsWithMedia;
-    protected $guarded=[];
 
-    public function user(){
-        return $this->belongsTo(User::class)->select(['id', 'name','username']);
+    protected $guarded = [];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class)->select(['id', 'name', 'username']);
     }
-    public function scopeWithUserDetails( $query)
+
+    public function scopeWithUserDetails($query)
     {
         return $query->with(['user' => function ($query) {
             $query->select('id', 'name', 'username');
         }]);
     }
+
     public function scopeWithUserComments($query)
     {
         return $query->with([
-            
+
             'comments:id,post_id,user_id,description', // Specify the columns for the comments relation
-            'comments.user:id,name,username'
+            'comments.user:id,name,username',
         ]);
     }
 
-  
     // ...
 
     public function scopeWithUserCommentsCount($query, $username)
@@ -54,9 +57,8 @@ class Post extends Model implements HasMedia
                 'users.id', 'users.username', 'users.name');
     }
 
-
-    
-    public function comments(){
+    public function comments()
+    {
         return $this->hasMany(Comment::class);
     }
 }

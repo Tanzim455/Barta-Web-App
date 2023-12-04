@@ -24,7 +24,7 @@ class PostRequest extends FormRequest
         return [
             //
             'description' => 'required|string|min:10|max:1000',
-            
+
         ];
     }
 }
