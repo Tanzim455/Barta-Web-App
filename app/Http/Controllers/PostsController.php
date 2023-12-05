@@ -73,13 +73,13 @@ class PostsController extends Controller
         //get user of a single post
         $postuserdetails = Post::withUserDetails()->findorFail($post->id);
         //Comment count of posts
-          $count = Post::withCount('comments')?->findorFail($post->id)->comments_count;
-         
+        $count = Post::withCount('comments')?->findorFail($post->id)->comments_count;
+
         //Get comment count of a post
         $postWithComments = Post::withUserComments()->findOrFail($post->id);
 
         if ($post) {
-            return view('posts.single', ['postuserdetails' => $postuserdetails, 'postWithComments' => $postWithComments,'count'=>$count]);
+            return view('posts.single', ['postuserdetails' => $postuserdetails, 'postWithComments' => $postWithComments, 'count' => $count]);
         } else {
             return redirect('/posts');
         }
