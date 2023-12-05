@@ -107,12 +107,12 @@
                     <div class="flex items-center justify-between">
                         <div class="flex items-center space-x-3">
                             <!-- User Avatar -->
-                            <!--                <div class="flex-shrink-0">-->
-                            <!--                  <img-->
-                            <!--                    class="h-10 w-10 rounded-full object-cover"-->
-                            <!--                    src="https://avatars.githubusercontent.com/u/831997"-->
-                            <!--                    alt="Tony Stark" />-->
-                            <!--                </div>-->
+                                            <div class="flex-shrink-0">
+                                             <img
+                                                class="h-10 w-10 rounded-full object-cover"
+                                                src="{{ asset('storage/profile/images/'.($post->user->image ?? 'avartar.jpg')) }}"
+                                               alt="Tony Stark" />
+                                           </div>
                             <!-- /User Avatar -->
 
                             <!-- User Info -->
