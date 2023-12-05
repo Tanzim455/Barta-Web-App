@@ -166,7 +166,7 @@
 
         <hr />
         <div class="flex flex-col space-y-6">
-          <h1 class="text-lg font-semibold">6</h1>
+          <h1 class="text-lg font-semibold">Comments {{$count}}</h1>
 
           <!-- Barta User Comments Container -->
          

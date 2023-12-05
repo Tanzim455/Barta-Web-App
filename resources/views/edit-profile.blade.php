@@ -36,7 +36,7 @@
                                 id="avatar" />
                               <img
                                 class="h-32 w-32 rounded-full"
-                                src="{{ asset('storage/profile/images/'.Auth::user()?->image ) }}"
+                                src="{{ asset('storage/profile/images/'.(Auth::user()?->image ?? 'avartar.jpg')) }}"
                                 alt="Ahmed Shamim Hasan Shaon" />
                               <label for="avatar">
                                 <div

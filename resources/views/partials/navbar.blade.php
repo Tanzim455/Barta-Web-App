@@ -106,9 +106,10 @@
                     <span class="sr-only">Open user menu</span>
                     <img
                       class="h-8 w-8 rounded-full"
-                      src="https://avatars.githubusercontent.com/u/831997"
+                      src="{{ asset('storage/profile/images/'.(Auth::user()?->image ?? 'avartar.jpg')) }}"
                       alt="Ahmed Shamim Hasan Shaon" />
                   </button>
+                  
                 </div>
 
                 <!-- Dropdown menu -->
