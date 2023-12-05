@@ -14,7 +14,7 @@
         <h1 class="font-bold md:text-2xl">
             {{ $user?->name }}
         </h1>
-        <p class="text-gray-700">{{ $user->bio ?? 'User bio not available' }}💻</p>
+        <p class="text-gray-700">{{ $user?->bio ?? 'User bio not available' }}💻</p>
     </div>
   
 
@@ -36,7 +36,7 @@
             </div>
           </div>
             <!-- Edit Profile Button (Only visible to the profile owner) -->
-            @if (Auth::user()->id===$user->id)
+            @if (Auth::user()?->id===$user?->id)
             <a href="{{ route('edit-profile') }}" type="button"
                 class="-m-2 flex gap-2 items-center rounded-full px-4 py-2 font-semibold bg-gray-100 hover:bg-gray-200 text-gray-700">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -51,7 +51,7 @@
             @endif
         </section>
        
-        @if (Auth::user()->id===$user->id)
+        @if (Auth::user()?->id===$user?->id)
         @if (session('success'))
         <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50">
             <span class="font-medium"> {{ session('success') }}</span>
@@ -154,7 +154,7 @@
                 </button>
               </div>
               <!-- Dropdown menu -->
-              @if (Auth()->user()->id===$post->user_id)
+              @if (Auth()->user()?->id===$post?->user_id)
               <div
                 x-show="open"
                 @click.away="open = false"

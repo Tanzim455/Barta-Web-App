@@ -23,11 +23,19 @@ class ProfileController extends Controller
         //Fetch information about users profile
 
         $user = User::select('id', 'name', 'bio')->where('username', $username)->first();
-
-        $countofPosts = User::withCount('posts')->where('username', $username)->first()->posts_count;
-
+           
+        $userExists= User::withCount('posts')->where('username', $username)->first();
+       
+            $countofPosts=$userExists?->posts_count;
+            $commentsOfUserPostsCount = Comment::fromUserPosts($user?->id)->count();
+            
+         
         //Count all comments of specific post of the user
-        $commentsOfUserPostsCount = Comment::fromUserPosts($user->id)->count();
+           
+            
+           
+        
+        
 
         //All user posts with comment count
         $userposts = Post::withUserCommentsCount($username)->get();

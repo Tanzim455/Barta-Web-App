@@ -15,10 +15,14 @@
             <div>
                 <div class="flex items-start /space-x-3/">
                     <div class="flex-shrink-0">
-                        <img
-                          class="h-10 w-10 rounded-full object-cover"
-                          src="{{ asset('storage/profile/images/'.Auth::user()?->image ) }}"
-                          alt="Ahmed Shamim" />
+                        <div class="flex-shrink-0">
+                            <div class="flex-shrink-0">
+                                <img
+                                    class="h-10 w-10 rounded-full object-cover"
+                                    src="{{ asset('storage/profile/images/'.(Auth::user()?->image ?? 'avartar.jpg')) }}"
+                                    alt="Ahmed Shamim" />
+                            </div>
+                          </div>
                       </div>
 
                     <!-- Content -->
