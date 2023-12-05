@@ -28,7 +28,7 @@ Route::middleware('auth')->group(function () {
 });
 Route::resource('posts', PostsController::class);
 Route::post('comments', [CommentController::class, 'store'])->name('comments.store');
-
+Route::get('/searchuser', [SearchController::class, 'search'])->name('searchuser')->middleware('auth');
 require __DIR__.'/auth.php';
-Route::get('/searchuser', [SearchController::class, 'search'])->name('searchuser');
+
 Route::get('/{user}', [ProfileController::class, 'profile'])->where('user', '[A-Za-z0-9_]+')->name('profile');
