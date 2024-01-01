@@ -4,6 +4,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', function () {
+    
     return view('login');
 })->middleware('guest');
 Route::get('/home', [PostsController::class, 'index'])->name('home')->middleware('auth');

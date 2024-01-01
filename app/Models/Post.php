@@ -5,13 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Post extends Model implements HasMedia
+
+class Post extends Model 
 {
     use HasFactory;
-    use InteractsWithMedia;
+    
 
     protected $guarded = [];
 
