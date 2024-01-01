@@ -1,4 +1,5 @@
 <div>
+    
     @foreach ($posts as $post)
             <article class="bg-white border-2 border-black rounded-lg shadow mx-auto max-w-none px-4 py-5 sm:px-6">
                 <!-- Barta Card Top -->
@@ -102,4 +103,14 @@
 
             </article>  
             @endforeach
+     
+       
+           {{$perPage}}
+          
+        <button wire:click="loadMore">Load more</button>
+        
+    
+    
+       
 </div>
+
