@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Post;
 use Illuminate\Support\Collection;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -22,6 +23,7 @@ class HomePage extends Component
     // public function paginator(){
     //     return  ;
     // }
+    //  #[Layout('layouts.app')] 
     public function render()
     {
         
