@@ -105,9 +105,13 @@
             @endforeach
      
        
-           {{$perPage}}
+           
           
-        <button wire:click="loadMore">Load more</button>
+          
+           <div x-intersect="$wire.loadMore()" class="h-12 -translate-y-44"></div>
+       
+   
+      
         
     
     

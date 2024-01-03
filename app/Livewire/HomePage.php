@@ -13,17 +13,10 @@ class HomePage extends Component
 {
     use WithPagination;
     public int $page=1;
+   
+    
     public int $perPage=10;
-    // public Collection $posts;
-    // public function mount(){
-    //     $this->posts=collect();
-    //     $this->loadMore();
-    // }
-    // #[Computed()]
-    // public function paginator(){
-    //     return  ;
-    // }
-    //  #[Layout('layouts.app')] 
+   
     public function render()
     {
         
@@ -33,11 +26,11 @@ class HomePage extends Component
             ->select('user_id', 'uuid', 'description', 'image')
             ->latest()->paginate($this->perPage, ['*'], 'page', $this->page)
         ]);
-        return view('livewire.home-page');
+        
     }
     public function loadMore(){
         
-       $this->perPage +=10;
+        $this->perPage +=10;
     }
 
 }
