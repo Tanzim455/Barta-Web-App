@@ -106,9 +106,12 @@
      
        
            
-          
-          
+           @if ($posts->hasMorePages())
            <div x-intersect="$wire.loadMore()" class="h-12 -translate-y-44"></div>
+                
+           @endif
+          
+          
        
    
       
