@@ -168,14 +168,18 @@
 
         <hr />
         <div class="flex flex-col space-y-6">
-          <h1 class="text-lg font-semibold">Comments {{$count}}</h1>
+          @livewire('comment-list', ['postWithComments' => $postWithComments->comments, 'count' => $count] )
+          {{-- <livewire:comment-list  
+          :postWithComments="$postWithComments->comments"
+        
+          /> --}}
           {{-- <p>{{$postuserdetails->id}}</p> --}}
           {{-- {{$postuserdetails->id}} --}}
             
              {{-- <livewire:counter :postuserdetails="$postuserdetails->id" />  --}}
           <!-- Barta User Comments Container -->
          
-          @if(isset($postWithComments->comments) && !empty($postWithComments->comments))
+          {{-- @if(isset($postWithComments->comments) && !empty($postWithComments->comments))
           @foreach ($postWithComments->comments as $comment)
           <article
             class="bg-white border-2 border-black rounded-lg shadow mx-auto max-w-none px-4 py-2 sm:px-6 min-w-full divide-y">
@@ -221,7 +225,7 @@
            
           </article>
           @endforeach
-          @endif
+          @endif --}}
           <!-- /Barta User Comments -->
         </div
       </section>

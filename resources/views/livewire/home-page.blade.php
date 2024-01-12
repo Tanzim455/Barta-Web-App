@@ -88,7 +88,7 @@
     
                     
                     @endif
-                    <a href="{{route('posts.show',$post->uuid)}}">
+                    <a href="{{route('posts.show',$post->uuid)}}" wire:navigate>
                         {{$post->description}}
                    </a>
                 </div>

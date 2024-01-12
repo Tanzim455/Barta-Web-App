@@ -1,8 +1,12 @@
 <div>
     {{-- Stop trying to control. --}}
-    postId={{$postuserdetails}}
+    @if (session()->has('success'))
+    <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50">
+        {{ session('success') }}
+    </div>
+      @endif
     <form
-            wire:submit="save">
+            wire:submit.prevent="save">
             
             <!-- Create Comment Card Top -->
             
