@@ -7,7 +7,7 @@ use App\Models\Post;
 use App\Notifications\CommentNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
+
 use Illuminate\Support\Str;
 
 class CommentController extends Controller

@@ -105,7 +105,7 @@
           <hr class="my-6" />
 
           <!-- Barta Create Comment Form -->
-          <form
+          {{-- <form
             action="{{route('comments.store')}}"
             method="POST">
             @csrf
@@ -157,7 +157,9 @@
               <!-- /Card Bottom Action Buttons -->
             </div>
             <!-- /Create Comment Card Bottom -->
-          </form>
+          </form> --}}
+         <livewire:comment-created :postuserdetails="$postuserdetails->id" />
+            {{-- <livewire:article-created /> --}}
           <!-- /Barta Create Comment Form -->
 
           <!-- /Barta Card Bottom -->
@@ -167,7 +169,10 @@
         <hr />
         <div class="flex flex-col space-y-6">
           <h1 class="text-lg font-semibold">Comments {{$count}}</h1>
-
+          {{-- <p>{{$postuserdetails->id}}</p> --}}
+          {{-- {{$postuserdetails->id}} --}}
+            
+             {{-- <livewire:counter :postuserdetails="$postuserdetails->id" />  --}}
           <!-- Barta User Comments Container -->
          
           @if(isset($postWithComments->comments) && !empty($postWithComments->comments))

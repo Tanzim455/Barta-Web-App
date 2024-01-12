@@ -4,6 +4,8 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
+
+use App\Livewire\ArticleCreated;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +41,7 @@ Route::get('notifications',function(){
 
     return view('notification',compact('notifications'));
 });
+Route::get('article',ArticleCreated::class);
 require __DIR__.'/auth.php';
 
 Route::get('/{user}', [ProfileController::class, 'profile'])->where('user', '[A-Za-z0-9_]+')->name('profile');
