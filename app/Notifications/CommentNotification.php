@@ -37,8 +37,8 @@ class CommentNotification extends Notification implements ShouldQueue
     // public function toMail(object $notifiable): MailMessage
     // {
     //     return (new MailMessage)
-    //                 ->line('The introduction to the notification.')
-    //                 ->action('Notification Action', url('/'))
+    //                 ->line('Your post has been commented by')
+    //                 ->action('Your post', url('/post'.$this->post->uuid))
     //                 ->line('Thank you for using our application!');
     // }
 

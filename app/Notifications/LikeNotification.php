@@ -28,7 +28,7 @@ class LikeNotification extends Notification implements ShouldQueue
      */
     public function via(object $notifiable): array
     {
-        return ['database'];
+        return ['database','mail'];
     }
 
     /**
@@ -37,8 +37,8 @@ class LikeNotification extends Notification implements ShouldQueue
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
+                    ->line("Your '{$this->post->description}' post has been liked by '{$this->user->name}'")
+                    ->action('Your post', url('/posts/'.$this->post->uuid))
                     ->line('Thank you for using our application!');
     }
 

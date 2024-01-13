@@ -24,7 +24,7 @@
                     href="{{route('posts.show',$notification->data['url'])}}"
                     wire:navigate
                     class="text-sm font-medium text-gray-800">{{$notification->data['data']}}</a>
-                    <p class="text-xs text-gray-500">2 hours ago</p>
+                    <p class="text-xs text-gray-500">{{$notification->created_at->diffForHumans()}}</p>
                 </div>
                 @endforeach
             </div>
