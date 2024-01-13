@@ -56,12 +56,14 @@
                     Create Post
                   </button>
                   @if (auth()->user()?->unreadNotifications->count())
-                  <a href="{{route('notifications')}}">
+                  <a href="{{route('notifications')}}" wire:navigate>
                     <i class="fa-regular fa-bell block cursor-pointer text-red-600">{{
                       auth()->user()?->unreadNotifications->count()}}</i>
                   </a>
                   @else 
-                  <a href="{{route('notifications')}}">
+                  <a href="{{route('notifications')}}"
+                  wire:navigate
+                  >
                   <i class="fa-regular fa-bell block cursor-pointer"></i>
                   </a>
                   @endif

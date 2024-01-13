@@ -3,7 +3,9 @@
 namespace App\Livewire;
 
 use App\Models\Post;
+use App\Models\User;
 use App\Models\UserPostLike;
+use App\Notifications\LikeNotification;
 use Illuminate\Support\Collection;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
@@ -48,14 +50,20 @@ class HomePage extends Component
         }
         if(!$postLikeId){
             
-             UserPostLike::create([
+            $like=UserPostLike::create([
                 'user_id'=>auth()?->user()?->id,
                  'post_id'=>$postId,
                  
              ]);
-        // dd("Post is not liked");
+            
+             $post=Post::findOrFail($like->post_id);
+             $user=User::findorFail($like->user_id);
         
-        }
+             if($post->user_id !== auth()?->user()->id){
+                $post->user->notify(new LikeNotification($post, $user));
+            }
+        // dd("Post is not liked");
+            }
         
         
         
@@ -63,8 +71,7 @@ class HomePage extends Component
     public function render()
     {
        
-        $posts=Post::withUserDetails()
-        ->withCount('likedPosts')->paginate(10);
+        
 
         
         
