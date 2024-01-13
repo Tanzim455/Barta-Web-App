@@ -98,9 +98,25 @@
                     <span class="">15 hours ago</span>
                     <span class="">•</span>
                     <span>4,450 views</span>
+                    
+                    {{-- <i class="fa-solid fa-heart text-red-600"></i> --}}
+                    {{-- {{$counter}} --}}
+                    @if(auth()?->user()?->likedPosts->contains($post))
+                    <button wire:click="likeStatus('{{ $post->id }}')" type="button">
+                        <i class="fa-solid fa-heart text-xl cursor-pointer text-red-600"></i>
+                    </button>
+                    @else 
+                    <button wire:click="likeStatus('{{ $post->id }}')" type="button">
+                        <i class="fa-regular fa-heart text-xl  cursor-pointer "></i>
+                    </button>
+                    @endif
+                    
+                    
+                     Post Likes Count-{{$post->liked_posts_count}}
+                     {{-- <button wire:click="increaseCounter">+</button> --}}
                 </div>
 
-
+                       
             </article>  
             @endforeach
      

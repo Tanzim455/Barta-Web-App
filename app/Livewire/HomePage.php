@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Post;
+use App\Models\UserPostLike;
 use Illuminate\Support\Collection;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
@@ -16,21 +17,65 @@ class HomePage extends Component
    
     
     public int $perPage=10;
+    public $counter=0;
+    public $isLiked;
+     
+    use WithPagination;
    
-    public function render()
-    {
+    public function likeStatus($id)
+    { 
+       
+         $postId=Post::findOrFail($id)->id;
+        //   dd($postId);
         
 
+         $postLikeId=UserPostLike::where('post_id',$postId)
+         ->where('user_id',auth()?->user()->id)
+         
+         ->exists();
+         
+         $likedPost=UserPostLike::where('post_id',$postId)
+         ->where('user_id',auth()?->user()->id)->first();
+         
+        
+        
+          
+       
+        if($postLikeId){
+            
+            $likedPost->delete();
+        
+        }
+        if(!$postLikeId){
+            
+             UserPostLike::create([
+                'user_id'=>auth()?->user()?->id,
+                 'post_id'=>$postId,
+                 
+             ]);
+        // dd("Post is not liked");
+        
+        }
+        
+        
+        
+    }
+    public function render()
+    {
+       
+        $posts=Post::withUserDetails()
+        ->withCount('likedPosts')->paginate(10);
+
+        
+        
         return view('livewire.home-page',[
             'posts'=>Post::withUserDetails()
-            ->select('user_id', 'uuid', 'description', 'image')
+            ->withCount('likedPosts')
+            
             ->latest()->paginate($this->perPage, ['*'], 'page', $this->page)
         ]);
         
     }
-    public function loadMore(){
-        
-        $this->perPage +=10;
-    }
+  
 
 }

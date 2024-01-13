@@ -43,14 +43,17 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class);
     }
-
+    public function likedPosts()
+    {
+        return $this->belongsToMany(Post::class, 'user_post_likes', 'user_id', 'post_id');
+    }
     public function scopeWithUserDetails($query)
     {
         return $query->with(['user' => function ($query) {
             $query->select('id', 'name', 'username');
         }]);
     }
-
+   
     /**
      * The attributes that should be cast.
      *
