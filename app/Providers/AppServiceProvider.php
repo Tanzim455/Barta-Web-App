@@ -25,5 +25,6 @@ class AppServiceProvider extends ServiceProvider
         Post::deleting(function ($post) {
             $post->comments()->delete();
         });
+       
     }
 }

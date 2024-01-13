@@ -39,7 +39,10 @@ public function mount()
         
         // Assuming CommentNotification constructor expects a Post instance as the first argument
         // and a Comment instance as the second argument
-         $post->user->notify(new CommentNotification($post, $comment));
+        if($post->user_id !== auth()?->user()->id){
+            $post->user->notify(new CommentNotification($post, $comment));
+        }
+         
     
         session()->flash('success', 'Your comment has been posted successfully');
         

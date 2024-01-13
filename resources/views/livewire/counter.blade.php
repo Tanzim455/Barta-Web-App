@@ -1,6 +1,6 @@
 <div>
     From counter
-    
+    Count-{{$count}}
      
-     <div>{{$postuserdetails}}</div>
+     <button wire:click="increment">+</button>
 </div>

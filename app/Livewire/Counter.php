@@ -6,12 +6,12 @@ use Livewire\Component;
  
 class Counter extends Component
 {
-     public $count = 1;
+     public $count = 0;
      public $postuserdetails;
-    // public function increment()
-    // {
-    //     $this->count++;
-    // }
+    public function increment()
+    {
+        $this->count++;
+    }
  
     // public function decrement()
     // {

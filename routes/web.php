@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
@@ -33,14 +34,7 @@ Route::middleware('auth')->group(function () {
 Route::resource('posts', PostsController::class);
 Route::post('comments', [CommentController::class, 'store'])->name('comments.store');
 Route::get('/searchuser', [SearchController::class, 'search'])->name('searchuser')->middleware('auth');
-Route::get('notifications',function(){
-     $notifications=auth()?->user()?->notifications;
-    //  foreach($notifications as $notification){
-    //     dd($notification->data['data']);
-    //  }
-
-    return view('notification',compact('notifications'));
-});
+Route::get('notifications',[NotificationController::class,'index'])->name('notifications');
 Route::get('article',ArticleCreated::class);
 require __DIR__.'/auth.php';
 
